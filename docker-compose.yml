@@ -1,0 +1,14 @@
+services:
+  rclone:
+    image: rclone/rclone:latest
+    container_name: prospect_rclone
+    # Roda com o mesmo usuário do seu sistema para evitar problemas de permissão nos arquivos
+    user: "${UID:-1000}:${GID:-1000}"
+    volumes:
+      # Cria uma pasta local oculta para salvar a configuração (login do drive)
+      - ./.rclone_config:/config/rclone
+      # Mapeia todo o diretório do projeto para dentro do contêiner em /project
+      - .:/project
+    working_dir: /project
+    # Comando padrão (não faz nada se você der docker compose up, o foco é usar run)
+    command: version
