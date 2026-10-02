@@ -4,3 +4,6 @@ _dgrive_raw/
 
 # Rclone config
 .rclone_config/
+
+# Variáveis de ambiente
+.env

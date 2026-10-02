@@ -1,9 +1,13 @@
 #!/bin/bash
 
 # Configurações
-REMOTE_NAME="gdrive"
-REMOTE_PATH="pasta_compartilhada_no_drive" # Substitua pelo nome da pasta no seu Google Drive
-LOCAL_PATH="_gdrive_raw/"
+# Carrega as configurações do arquivo .env
+if [ -f ".env" ]; then
+    export $(grep -v '^#' .env | xargs)
+else
+    echo "Erro: Arquivo .env não encontrado. Copie o .env.example para .env e preencha as variáveis."
+    exit 1
+fi
 
 echo "Iniciando a sincronização do Google Drive ($REMOTE_NAME:$REMOTE_PATH) para $LOCAL_PATH via Docker..."
 
